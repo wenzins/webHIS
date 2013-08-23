@@ -2,15 +2,25 @@ package webhis;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Entity
+@Table(name="T_CARE_PRV_ADDRESS")
 public class CareProviderAddress {
 	
 	@Id
-	@Column(name="REG_NUM")
+	@Column(unique=true, nullable=false)
+	@GeneratedValue(generator="gen")
+	@GenericGenerator(name="gen", strategy="foreign", parameters=@Parameter(name="property", value="patientCPAddr"))
 	private String regNumber;
-	
+
 	private String addrLine1;
 	
 	private String addrLine2;
@@ -32,6 +42,28 @@ public class CareProviderAddress {
 	private AddressType addressType;
 	
 	private InsuranceStatus insStatus;
+	
+	@OneToOne
+    @PrimaryKeyJoinColumn
+	private PatientDetails patientDetails;
+	
+	public CareProviderAddress(String addrLine1, String addrLine2, String city,
+			String district, String state, String pincode,
+			webhis.PhoneType phoneType, String phoneNumber, String email,
+			AddressType addressType, InsuranceStatus insStatus) {
+		super();
+		this.addrLine1 = addrLine1;
+		this.addrLine2 = addrLine2;
+		this.city = city;
+		this.district = district;
+		State = state;
+		this.pincode = pincode;
+		PhoneType = phoneType;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.addressType = addressType;
+		this.insStatus = insStatus;
+	}
 
 	public String getRegNumber() {
 		return regNumber;

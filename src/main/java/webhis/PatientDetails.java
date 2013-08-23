@@ -2,11 +2,15 @@ package webhis;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
 import webhis.PatientGender;
 
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -15,26 +19,21 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Table(name="T_PATIENT")
 public class PatientDetails {	
 	
-	@Column(name="UHID")
 	private String UHID;
 	
 	@Id
-	@Column(name="REG_NUM")
+	@GeneratedValue
 	private String regNumber;
 	
-	@Column(name="NAME")
 	private String Name;
 	
-	@Column(name="DOB")
 	private Date DOB;
 	
 	@Transient
 	private int age;
 	
-	@Column(name="GENDER")
 	private PatientGender gender;
 	
-	@Column(name="OCCUPATION")
 	private String occupation;
 	
 	private String emergencyContName;
@@ -45,10 +44,13 @@ public class PatientDetails {
 	
 	private RelationShip careProviderRelationShip;
 	
+	@OneToOne(mappedBy="patientAddr", cascade=CascadeType.ALL)
 	private PatientAddress patientAddress;
 	
+	@OneToOne(mappedBy="patientEMAddr", cascade=CascadeType.ALL)
 	private EmergencyContAddress emergencyContAddress;
 	
+	@OneToOne(mappedBy="patientCPAddr", cascade=CascadeType.ALL)
 	private CareProviderAddress careProviderAddress;
 
 	public String getUHID() {

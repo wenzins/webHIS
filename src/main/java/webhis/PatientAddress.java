@@ -2,13 +2,23 @@ package webhis;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Entity
+@Table(name="T_PT_ADDRESS")
 public class PatientAddress {
 	
 	@Id
-	@Column(name="REG_NUM")
+	@Column(unique=true, nullable=false)
+	@GeneratedValue(generator="gen")
+	@GenericGenerator(name="gen", strategy="foreign", parameters=@Parameter(name="property", value="patientAddr"))
 	private String regNumber;
 	
 	private String addrLine1;
@@ -30,6 +40,10 @@ public class PatientAddress {
 	private String email;
 	
 	private AddressType addressType;
+	
+	@OneToOne
+    @PrimaryKeyJoinColumn
+	private PatientDetails patientDetails;
 
 	public String getRegNumber() {
 		return regNumber;
@@ -49,6 +63,23 @@ public class PatientAddress {
 
 	public String getAddrLine2() {
 		return addrLine2;
+	}
+
+	public PatientAddress(String addrLine1, String addrLine2, String city,
+			String district, String state, String pincode,
+			webhis.PhoneType phoneType, String phoneNumber, String email,
+			AddressType addressType) {
+		super();
+		this.addrLine1 = addrLine1;
+		this.addrLine2 = addrLine2;
+		this.city = city;
+		this.district = district;
+		State = state;
+		this.pincode = pincode;
+		PhoneType = phoneType;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.addressType = addressType;
 	}
 
 	public void setAddrLine2(String addrLine2) {
