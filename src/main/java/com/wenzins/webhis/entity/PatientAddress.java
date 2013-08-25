@@ -10,16 +10,16 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-
 import com.wenzins.webhis.entity.types.AddressType;
 import com.wenzins.webhis.entity.types.PhoneType;
 
 @Entity
 @Table(name = "PATIENT_ADDRESS")
-public class PatientAddress {
+public class PatientAddress implements java.io.Serializable {
+
+	private static final long serialVersionUID = -8158361737220282015L;
 
 	private String patientId;
 
@@ -31,11 +31,11 @@ public class PatientAddress {
 
 	private String district;
 
-	private String State;
+	private String state;
 
 	private String pincode;
 
-	private PhoneType PhoneType;
+	private PhoneType phoneType;
 
 	private String phoneNumber;
 
@@ -45,6 +45,10 @@ public class PatientAddress {
 
 	private Patient patient;
 
+	//Default Constructor
+	public PatientAddress(){
+		
+	}
 	public PatientAddress(String addrLine1, String addrLine2, String city,
 			String district, String state, String pincode, PhoneType phoneType,
 			String phoneNumber, String email, AddressType addressType) {
@@ -53,9 +57,9 @@ public class PatientAddress {
 		this.addrLine2 = addrLine2;
 		this.city = city;
 		this.district = district;
-		State = state;
+		this.state = state;
 		this.pincode = pincode;
-		PhoneType = phoneType;
+		this.phoneType = phoneType;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 		this.addressType = addressType;
@@ -64,15 +68,15 @@ public class PatientAddress {
 	@OneToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
 	public Patient getPatient() {
-		return patient;
+		return this.patient;
 	}
 
+	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "patient"))
 	@Id
-	@Column(unique = true, nullable = false)
-	@GeneratedValue(generator = "gen")
-	@GenericGenerator(name = "gen", strategy = "foreign", parameters = @Parameter(name = "property", value = "patientAddr"))
+	@GeneratedValue(generator = "generator")
+	@Column(name = "PATIENT_ID", unique = true, nullable = false)
 	public String getPatientId() {
-		return patientId;
+		return this.patientId;
 	}
 
 	@Column(name = "ADDRESS_LINE1")
@@ -82,49 +86,49 @@ public class PatientAddress {
 
 	@Column(name = "ADDRESS_LINE2")
 	public String getAddrLine2() {
-		return addrLine2;
+		return this.addrLine2;
 	}
 
 	@Column(name = "CITY")
 	public String getCity() {
-		return city;
+		return this.city;
 	}
 
 	@Column(name = "DISTRICT")
 	public String getDistrict() {
-		return district;
+		return this.district;
 	}
 
 	@Column(name = "STATE")
 	public String getState() {
-		return State;
+		return this.state;
 	}
 
 	@Column(name = "PIN_CODE")
 	public String getPincode() {
-		return pincode;
+		return this.pincode;
 	}
 
 	@Column(name = "PHONE_NUMBER")
 	public String getPhoneNumber() {
-		return phoneNumber;
+		return this.phoneNumber;
 	}
 
 	@Column(name = "EMAIL_ADDRESS")
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "PHONE_TYPE")
 	public PhoneType getPhoneType() {
-		return PhoneType;
+		return this.phoneType;
 	}
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "ADDRESS_TYPE")
 	public AddressType getAddressType() {
-		return addressType;
+		return this.addressType;
 	}
 
 	public void setPatient(Patient patient) {
@@ -152,7 +156,7 @@ public class PatientAddress {
 	}
 
 	public void setState(String state) {
-		State = state;
+		this.state = state;
 	}
 
 	public void setPincode(String pincode) {
@@ -160,7 +164,7 @@ public class PatientAddress {
 	}
 
 	public void setPhoneType(PhoneType phoneType) {
-		PhoneType = phoneType;
+		this.phoneType = phoneType;
 	}
 
 	public void setPhoneNumber(String phoneNumber) {

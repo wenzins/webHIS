@@ -9,5 +9,5 @@ public interface PatientDAO {
 
 	public List<Patient> listAllPatients();
 
-	public void deletePatientDetails(Integer patientId);
+	public void deletePatientDetails(long patientId);
 }

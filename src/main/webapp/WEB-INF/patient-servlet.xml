@@ -61,7 +61,7 @@
     </bean>
     
     <bean id="patientDAO" class="com.wenzins.webhis.dao.PatientDaoImpl"></bean>
-    <bean id="patientMgmtService" class="com.wenzins.webhis.controller.PatientMgmtServiceImpl"></bean>
+    <bean id="patientMgmtService" class="com.wenzins.webhis.service.PatientMgmtServiceImpl"></bean>
  
     <tx:annotation-driven />
     <bean id="transactionManager"

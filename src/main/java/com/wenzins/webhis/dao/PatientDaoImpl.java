@@ -26,7 +26,7 @@ public class PatientDaoImpl implements PatientDAO {
 		}
 
 	@Override
-	public void deletePatientDetails(Integer patientId) {
+	public void deletePatientDetails(long patientId) {
 		Patient patient = (Patient) sessionFactory.getCurrentSession().load(
 				Patient.class, patientId);
         if (null != patient) {

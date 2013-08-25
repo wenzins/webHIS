@@ -12,16 +12,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.GenericGenerator;
+
 import com.wenzins.webhis.entity.types.PatientGender;
 import com.wenzins.webhis.entity.types.RelationShip;
 
 @Entity
 @Table(name = "PATIENT")
-public class Patient {
+public class Patient implements java.io.Serializable {
+
+	private static final long serialVersionUID = 926436474204511691L;
 
 	private String UHID;
 
-	private String patientId;
+	private Long patientId;
 
 	private String firstName;
 
@@ -58,9 +64,10 @@ public class Patient {
 	}
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator="increment")
+	@GenericGenerator(name="increment", strategy = "increment")
 	@Column(name = "PATIENT_ID", unique = true, nullable = false)
-	public String getPatientId() {
+	public Long getPatientId() {
 		return patientId;
 	}
 
@@ -79,7 +86,7 @@ public class Patient {
 		return dateOfBirth;
 	}
 
-	@Column(name = "AGE")
+	@Transient
 	public int getAge() {
 		return age;
 	}
@@ -117,22 +124,22 @@ public class Patient {
 		return careProviderRelationShip;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "patientAddr", cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "patient", cascade = CascadeType.ALL)
 	public PatientAddress getPatientAddress() {
 		return patientAddress;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "patientEMAddr", cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "patient", cascade = CascadeType.ALL)
 	public EmergencyContAddress getEmergencyContAddress() {
 		return emergencyContAddress;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "patientCPAddr", cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "patient", cascade = CascadeType.ALL)
 	public CareProviderAddress getCareProviderAddress() {
 		return careProviderAddress;
 	}
 
-	public void SetPatientId(String patientId) {
+	public void setPatientId(Long patientId) {
 		this.patientId = patientId;
 	}
 

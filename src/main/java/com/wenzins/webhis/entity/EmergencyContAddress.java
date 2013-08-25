@@ -19,7 +19,9 @@ import com.wenzins.webhis.entity.types.PhoneType;
 
 @Entity
 @Table(name = "EMERGENCY_CONTACT_ADDRESS")
-public class EmergencyContAddress {
+public class EmergencyContAddress implements java.io.Serializable{
+
+	private static final long serialVersionUID = 4136173737730879320L;
 
 	private String patientId;
 
@@ -44,6 +46,11 @@ public class EmergencyContAddress {
 	private AddressType addressType;
 
 	private Patient patient;
+	
+	//default constructor
+	public EmergencyContAddress(){
+		
+	}
 
 	public EmergencyContAddress(String addrLine1, String addrLine2,
 			String city, String district, String state, String pincode,
@@ -68,10 +75,10 @@ public class EmergencyContAddress {
 		return patient;
 	}
 
+	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "patient"))
 	@Id
-	@Column(unique = true, nullable = false)
-	@GeneratedValue(generator = "gen")
-	@GenericGenerator(name = "gen", strategy = "foreign", parameters = @Parameter(name = "property", value = "patientEMAddr"))
+	@GeneratedValue(generator = "generator")
+	@Column(name = "PATIENT_ID", unique = true, nullable = false)
 	public String getPatientId() {
 		return patientId;
 	}

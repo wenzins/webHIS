@@ -16,5 +16,5 @@ public interface PatientMgmtService {
 
 	public void updatePatientDetails(Patient patient);
 
-	public void deletePatientDetails(Integer patientId);
+	public void deletePatientDetails(long patientId);
 }

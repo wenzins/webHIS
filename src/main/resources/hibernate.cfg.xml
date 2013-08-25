@@ -6,5 +6,8 @@
 <hibernate-configuration>
     <session-factory>
         <mapping class="com.wenzins.webhis.entity.Patient" />
+        <mapping class="com.wenzins.webhis.entity.CareProviderAddress" />
+        <mapping class="com.wenzins.webhis.entity.EmergencyContAddress" />
+        <mapping class="com.wenzins.webhis.entity.PatientAddress" />
     </session-factory>
 </hibernate-configuration>

@@ -4,8 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -19,7 +21,9 @@ import com.wenzins.webhis.entity.types.PhoneType;
 
 @Entity
 @Table(name = "CARE_PROVIDER_ADDRESS")
-public class CareProviderAddress {
+public class CareProviderAddress implements java.io.Serializable {
+
+	private static final long serialVersionUID = -3767781654532705131L;
 
 	private String patientId;
 
@@ -45,10 +49,12 @@ public class CareProviderAddress {
 
 	private InsuranceStatus insStatus;
 
-	@OneToOne
-	@PrimaryKeyJoinColumn
 	private Patient patient;
 
+	//Default constructor
+	public CareProviderAddress(){
+		
+	}
 	public CareProviderAddress(String addrLine1, String addrLine2, String city,
 			String district, String state, String pincode, PhoneType phoneType,
 			String phoneNumber, String email, AddressType addressType,
@@ -67,12 +73,18 @@ public class CareProviderAddress {
 		this.insStatus = insStatus;
 	}
 
+	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "patient"))
 	@Id
-	@Column(unique = true, nullable = false)
-	@GeneratedValue(generator = "gen")
-	@GenericGenerator(name = "gen", strategy = "foreign", parameters = @Parameter(name = "property", value = "patientCPAddr"))
+	@GeneratedValue(generator = "generator")
+	@Column(name = "PATIENT_ID", unique = true, nullable = false)
 	public String getPatientId() {
-		return patientId;
+		return this.patientId;
+	}
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn
+	public Patient getPatient() {
+		return patient;
 	}
 
 	public void setPatientId(String patientId) {
@@ -120,7 +132,7 @@ public class CareProviderAddress {
 		return this.phoneNumber;
 	}
 
-	@Column(name = "EMAIL_ID")
+	@Column(name = "EMAIL_ADDRESS")
 	public String getEmail() {
 		return this.email;
 	}
@@ -179,6 +191,10 @@ public class CareProviderAddress {
 
 	public void setInsStatus(InsuranceStatus insStatus) {
 		this.insStatus = insStatus;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
 	}
 
 }
