@@ -3,20 +3,16 @@ package com.wenzins.webhis.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.wenzins.webhis.dao.PatientDAO;
 import com.wenzins.webhis.entity.Patient;
 
-@Repository
 public class PatientMgmtServiceImpl implements PatientMgmtService {
 
 	@Autowired
 	private PatientDAO patientDAO;
 
 	@Override
-	@Transactional
 	public void registerPatient(Patient patient) {
 		patientDAO.registerPatient(patient);
 	}
@@ -45,7 +41,6 @@ public class PatientMgmtServiceImpl implements PatientMgmtService {
 	}
 
 	@Override
-	@Transactional
 	public List<Patient> getAllPatients() {
 		return patientDAO.listAllPatients();
 	}

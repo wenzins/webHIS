@@ -15,23 +15,26 @@ import com.wenzins.webhis.entity.Patient;
 import com.wenzins.webhis.service.PatientMgmtService;
 
 @Controller
+@RequestMapping("/patient")
 public class PatientRegistrationController {
 
 	@Autowired
 	PatientMgmtService patientMgmtService;
 
-	@RequestMapping(value = "/patient", method = RequestMethod.POST, headers = { "content-type=application/json" })
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
 	public void registerPatient(@RequestBody Patient patient) {
+		System.out.println("Came inside this method >>>>  ::::  " +patient);
 		patientMgmtService.registerPatient(patient);
 	}
-
-	@RequestMapping(method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public @ResponseBody
 	List<Patient> getPatients(ModelMap map) {
-		map.addAttribute("patient", new Patient());
-		map.addAttribute("patientList", patientMgmtService.getAllPatients());
-		return null;
+		System.out.println("Came inside this method >>>>  ::::  "
+				+ patientMgmtService.getAllPatients());
+		return patientMgmtService.getAllPatients();
+
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
