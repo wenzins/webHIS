@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Wenzins HIMS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="jquery/mobile/1.3.2/jquery.mobile-1.3.2.css" />
+<link rel="stylesheet" href="jquery/mobile/jqm-docs.css" />
+
+<script src="jquery/1.10.2/jquery-1.10.2.js"></script>
+<script src="jquery/mobile/1.3.2/jquery.mobile-1.3.2.js"></script>
+</head>
+<body>
+
+	<div data-role="page">
+
+		<div data-role="header" data-theme="f">
+			<h1>Wenzins Health Information Management System</h1>
+		</div>
+		<!-- /header -->
+
+		<div data-role="content" class="type-interior">
+			<div class="content-primary">
+				<div class="ui-grid-a" align="center">
+					<form id="HLogin" method="POST">
+						<div class="ui-body">
+							<div data-role="fieldcontain" align="left">
+								<label for="username" class="ui-hidden-accessible">Username:</label>
+								<input type="text" value="" name="username" id="username"
+									value="" placeholder="Username" required />
+							</div>
+							<div data-role="fieldcontain" align="left">
+								<label for="password" class="ui-hidden-accessible">Password:</label>
+								<input type="password" name="password" id="password" value=""
+									placeholder="Password" required />
+							</div>
+							<div class="ui-block-a" data-role="fieldcontain" align="left">
+								<label for="role" class="ui-hidden-accessible" class="select">Role:</label>
+								<select name="role" id="role" required>
+									<option value="">-- Select role --</option>
+									<option value="other">Other</option>
+									<option value="admin">Admin</option>
+									<option value="doc">Doctor</option>
+								</select>
+							</div>
+							<div data-role="fieldcontain">
+								<div class="ui-grid-b">
+									<div class="ui-block-a" align="center">
+										<a href="registration.html" data-role="button">Login</a>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+					</form>
+				</div>
+			</div>
+			<div class="content-secondary">
+				<div data-role="collapsible" data-collapsed="true" data-theme="b"
+					data-content-theme="d">
+
+					<ul data-role="listview" data-theme="c" data-dividertheme="d">
+						<li data-role="list-divider">Registration</li>
+						<li data-role="list-divider">New patient</li>
+						<li data-role="list-divider">OPD</li>
+						<li data-role="list-divider">Casualty</li>
+						<li data-role="list-divider">IPD</li>
+						<li data-role="list-divider">OT</li>
+						<li data-role="list-divider">Laboratory</li>
+						<li data-role="list-divider">Insurance</li>
+						<li data-role="list-divider">Reports</li>
+						<li data-role="list-divider">User Management</li>
+						<li data-role="list-divider">More...</li>
+					</ul>
+				</div>
+			</div>
+			<!-- content-secondary -->
+			</
+
+		</div>
+		<!-- /content -->
+
+	</div>
+	<!-- /page -->
+
+</body>
+</html>
