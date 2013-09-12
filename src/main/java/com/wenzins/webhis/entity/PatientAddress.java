@@ -4,14 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
+
 import com.wenzins.webhis.entity.types.AddressType;
 import com.wenzins.webhis.entity.types.PhoneType;
 
@@ -21,8 +19,8 @@ public class PatientAddress implements java.io.Serializable {
 
 	private static final long serialVersionUID = -8158361737220282015L;
 
-	private String patientId;
-
+	private Integer addressId;
+	
 	private String addrLine1;
 
 	private String addrLine2;
@@ -45,10 +43,11 @@ public class PatientAddress implements java.io.Serializable {
 
 	private Patient patient;
 
-	//Default Constructor
-	public PatientAddress(){
-		
+	// Default Constructor
+	public PatientAddress() {
+
 	}
+
 	public PatientAddress(String addrLine1, String addrLine2, String city,
 			String district, String state, String pincode, PhoneType phoneType,
 			String phoneNumber, String email, AddressType addressType) {
@@ -65,18 +64,17 @@ public class PatientAddress implements java.io.Serializable {
 		this.addressType = addressType;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
-	public Patient getPatient() {
-		return this.patient;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ADDRESS_ID", unique = true, nullable = false)
+	public Integer getAddressId() {
+		return this.addressId;
 	}
 
-	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "patient"))
-	@Id
-	@GeneratedValue(generator = "generator")
-	@Column(name = "PATIENT_ID", unique = true, nullable = false)
-	public String getPatientId() {
-		return this.patientId;
+	
+	@ManyToOne
+	public Patient getPatient() {
+		return this.patient;
 	}
 
 	@Column(name = "ADDRESS_LINE1")
@@ -135,10 +133,6 @@ public class PatientAddress implements java.io.Serializable {
 		this.patient = patient;
 	}
 
-	public void setPatientId(String patientId) {
-		this.patientId = patientId;
-	}
-
 	public void setAddrLine1(String addrLine1) {
 		this.addrLine1 = addrLine1;
 	}
@@ -177,5 +171,9 @@ public class PatientAddress implements java.io.Serializable {
 
 	public void setAddressType(AddressType addressType) {
 		this.addressType = addressType;
+	}
+	
+	public void setAddressId(Integer addressId) {
+		this.addressId = addressId;
 	}
 }
