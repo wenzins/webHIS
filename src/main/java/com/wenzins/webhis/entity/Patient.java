@@ -38,9 +38,25 @@ public class Patient implements java.io.Serializable {
 
 	@Column(name = "FIRSTNAME")
 	private String firstName;
+	
+	@Column(name = "MIDDLENAME")
+	private String middleName;
 
+	
 	@Column(name = "LASTNAME")
 	private String lastName;
+	
+	@Column(name = "EMAIL")
+	private String email;
+	
+	@Column(name = "MOBILE")
+	private String mobile;
+	
+	@Column(name = "PHONE_RESIDENCE")
+	private String phRes;
+	
+	@Column(name = "PHONE_OFFICE")
+	private String phOff;
 
 	@Column(name = "DOB")
 	private Date dateOfBirth;
@@ -77,9 +93,29 @@ public class Patient implements java.io.Serializable {
 	public String getFirstName() {
 		return firstName;
 	}
+	
+	public String getMiddleName() {
+		return middleName;
+	}
 
 	public String getLastName() {
 		return lastName;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	
+	public String getMobile() {
+		return mobile;
+	}
+	
+	public String getPhRes() {
+		return phRes;
+	}
+	
+	public String getPhOff() {
+		return phOff;
 	}
 
 	public Date getDateOfBirth() {
@@ -122,8 +158,28 @@ public class Patient implements java.io.Serializable {
 		this.firstName = firstName;
 	}
 
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	
+	public void setPhRes(String phRes) {
+		this.phRes = phRes;
+	}
+	
+	public void setPhOff(String phOff) {
+		this.phOff = phOff;
 	}
 
 	public void setDateOfBirth(Date dateOfBirth) {

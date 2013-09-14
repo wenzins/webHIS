@@ -39,6 +39,11 @@ public class TestPatientAssociation
 		Patient patient = new Patient();
 		patient.setDateOfBirth(new Date(System.currentTimeMillis()));
 		patient.setFirstName("demo-one");
+		patient.setMiddleName("middleName");
+		patient.setEmail("sdfsdf@ff.com");
+		patient.setMobile("9988834324234");
+		patient.setPhRes("08023423432");
+		patient.setPhOff("080-23423432");
 		patient.setLastName("user-one");
 		patient.setAge(20);
 		patient.setEmergencyContName("24324324324");
