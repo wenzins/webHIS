@@ -13,13 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wenzins.webhis.entity.Patient;
 import com.wenzins.webhis.service.PatientMgmtService;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiError;
-import com.wordnik.swagger.annotations.ApiOperation;
 
 @Controller
 @RequestMapping("/patient")
-@Api(value = "Patient Registration", listingClass = "PatientRegistrationController", basePath = "/api/v1/cars", description = "All operations for cars")
 public class PatientRegistrationController {
 
 	@Autowired
@@ -31,8 +27,6 @@ public class PatientRegistrationController {
 		patientMgmtService.registerPatient(patient);
 	}
 	
-	@ApiOperation(value = "Find all cars", notes = "Get all cars currently available", httpMethod = "GET", responseClass = "Car", multiValueResponse = true)
-    @ApiError(code = 500, reason = "Process error")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public @ResponseBody
 	List<Patient> getPatients(ModelMap map) {

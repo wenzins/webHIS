@@ -30,6 +30,8 @@ public class PatientAddress implements java.io.Serializable {
 	private String district;
 
 	private String state;
+	
+	private String country;
 
 	private String pincode;
 
@@ -49,7 +51,7 @@ public class PatientAddress implements java.io.Serializable {
 	}
 
 	public PatientAddress(String addrLine1, String addrLine2, String city,
-			String district, String state, String pincode, PhoneType phoneType,
+			String district, String state, String country, String pincode, PhoneType phoneType,
 			String phoneNumber, String email, AddressType addressType) {
 		super();
 		this.addrLine1 = addrLine1;
@@ -57,6 +59,7 @@ public class PatientAddress implements java.io.Serializable {
 		this.city = city;
 		this.district = district;
 		this.state = state;
+		this.country = country;
 		this.pincode = pincode;
 		this.phoneType = phoneType;
 		this.phoneNumber = phoneNumber;
@@ -100,6 +103,11 @@ public class PatientAddress implements java.io.Serializable {
 	@Column(name = "STATE")
 	public String getState() {
 		return this.state;
+	}
+	
+	@Column(name = "COUNTRY")
+	public String getCountry() {
+		return this.country;
 	}
 
 	@Column(name = "PIN_CODE")
@@ -151,6 +159,10 @@ public class PatientAddress implements java.io.Serializable {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+	
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 	public void setPincode(String pincode) {

@@ -4,26 +4,29 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
-
-import com.wenzins.webhis.entity.types.AddressType;
-import com.wenzins.webhis.entity.types.PhoneType;
+import com.wenzins.webhis.entity.types.RelationShip;
 
 @Entity
 @Table(name = "EMERGENCY_CONTACT_ADDRESS")
-public class EmergencyContAddress implements java.io.Serializable{
+public class EmergencyContAddress implements java.io.Serializable {
 
 	private static final long serialVersionUID = 4136173737730879320L;
+	
+	private String emergencyContId;
 
-	private String patientId;
+	private String firstName;
+
+	private String middleName;
+
+	private String lastName;
+
+	private RelationShip relationshipType;
 
 	private String addrLine1;
 
@@ -35,52 +38,73 @@ public class EmergencyContAddress implements java.io.Serializable{
 
 	private String state;
 
+	private String country;
+
 	private String pincode;
 
-	private PhoneType phoneType;
+	private String mobile;
 
-	private String phoneNumber;
+	private String phoneOff;
+
+	private String phoneRes;
 
 	private String email;
 
-	private AddressType addressType;
-
 	private Patient patient;
-	
-	//default constructor
-	public EmergencyContAddress(){
-		
-	}
 
-	public EmergencyContAddress(String addrLine1, String addrLine2,
-			String city, String district, String state, String pincode,
-			PhoneType phoneType, String phoneNumber, String email,
-			AddressType addressType) {
+	// default constructor
+	public EmergencyContAddress() {
+
+	}
+	
+	public EmergencyContAddress(String firstName,
+			String middleName, String lastName, RelationShip relationshipType,
+			String addrLine1, String addrLine2, String city,
+			String district, String state, String country, String pincode,
+			String mobile, String phoneOff, String phoneRes, String email) {
 		super();
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+		this.relationshipType = relationshipType;
 		this.addrLine1 = addrLine1;
 		this.addrLine2 = addrLine2;
 		this.city = city;
 		this.district = district;
 		this.state = state;
+		this.country = country;
 		this.pincode = pincode;
-		this.phoneType = phoneType;
-		this.phoneNumber = phoneNumber;
+		this.mobile = mobile;
+		this.phoneOff = phoneOff;
+		this.phoneRes = phoneRes;
 		this.email = email;
-		this.addressType = addressType;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
-	public Patient getPatient() {
-		return patient;
-	}
-
-	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "patient"))
 	@Id
-	@GeneratedValue(generator = "generator")
-	@Column(name = "PATIENT_ID", unique = true, nullable = false)
-	public String getPatientId() {
-		return patientId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ERMERGENCY_CONT_ID", unique = true, nullable = false)
+	public String getEmergencyConId() {
+		return emergencyContId;
+	}
+
+	@ManyToOne
+	public Patient getPatient() {
+		return this.patient;
+	}
+
+	@Column(name = "FIRSTNAME")
+	public String getFirstName() {
+		return firstName;
+	}
+
+	@Column(name = "MIDDLENAME")
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	@Column(name = "LASTNAME")
+	public String getLastName() {
+		return lastName;
 	}
 
 	@Column(name = "ADDRESS_LINE1")
@@ -108,39 +132,44 @@ public class EmergencyContAddress implements java.io.Serializable{
 		return this.state;
 	}
 
+	@Column(name = "COUNTRY")
+	public String getCountry() {
+		return this.country;
+	}
+
 	@Column(name = "PIN_CODE")
 	public String getPincode() {
 		return pincode;
 	}
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "PHONE_TYPE")
-	public PhoneType getPhoneType() {
-		return this.phoneType;
-	}
-
-	@Column(name = "PHONE_NUMBER")
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	@Column(name = "EMAIL_ADDRESS")
+	@Column(name = "EMAIL")
 	public String getEmail() {
 		return email;
 	}
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "ADDRESS_TYPE")
-	public AddressType getAddressType() {
-		return addressType;
+	@Column(name = "RELATIONSHIP_TYPE")
+	public RelationShip getRelationshipType() {
+		return relationshipType;
+	}
+
+	@Column(name = "CELL_PHONE_NUMBER")
+	public String getMobile() {
+		return mobile;
+	}
+
+	@Column(name = "PHONE_OFFICE")
+	public String getPhoneOff() {
+		return phoneOff;
+	}
+
+	@Column(name = "PHONE_RESIDENCE")
+	public String getPhoneRes() {
+		return phoneRes;
 	}
 
 	public void setPatient(Patient patient) {
 		this.patient = patient;
-	}
-
-	public void setPatientId(String patientId) {
-		this.patientId = patientId;
 	}
 
 	public void setAddrLine1(String addrLine1) {
@@ -163,24 +192,44 @@ public class EmergencyContAddress implements java.io.Serializable{
 		this.state = state;
 	}
 
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
 	public void setPincode(String pincode) {
 		this.pincode = pincode;
 	}
 
-	public void setPhoneType(PhoneType phoneType) {
-		this.phoneType = phoneType;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public void setAddressType(AddressType addressType) {
-		this.addressType = addressType;
+	public void setRelationshipType(RelationShip relationshipType) {
+		this.relationshipType = relationshipType;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public void setPhoneOff(String phoneOff) {
+		this.phoneOff = phoneOff;
+	}
+
+	public void setPhoneRes(String phoneRes) {
+		this.phoneRes = phoneRes;
+	}
+	
+	public void setEmergencyContId(String emergencyContId) {
+		this.emergencyContId = emergencyContId;
 	}
 
 }

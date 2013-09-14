@@ -31,6 +31,7 @@ public class TestPatientAssociation
 		address1.setPhoneType(PhoneType.LandLine);
 		address1.setPincode("45555");
 		address1.setState("Karnataka");
+		address1.setCountry("India");
 	
 		
 		

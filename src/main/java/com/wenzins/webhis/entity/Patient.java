@@ -49,7 +49,7 @@ public class Patient implements java.io.Serializable {
 	@Column(name = "EMAIL")
 	private String email;
 	
-	@Column(name = "MOBILE")
+	@Column(name = "CELL_PHONE_NUMBER")
 	private String mobile;
 	
 	@Column(name = "PHONE_RESIDENCE")
@@ -81,6 +81,10 @@ public class Patient implements java.io.Serializable {
 	@OneToMany( fetch = FetchType.EAGER , cascade=CascadeType.ALL)
 	@JoinColumn(name = "PATIENT_ID")
 	private Set<PatientAddress> patientAddress;
+	
+//	@OneToMany( fetch = FetchType.EAGER , cascade=CascadeType.ALL)
+//	@JoinColumn(name = "PATIENT_ID")
+//	private Set<EmergencyContAddress> emergencyContactAddress;
 
 	public String getUhid() {
 		return uhid;
@@ -145,6 +149,10 @@ public class Patient implements java.io.Serializable {
 	public Set<PatientAddress> getPatientAddress() {
 		return patientAddress;
 	}
+	
+//	public Set<EmergencyContAddress> getEmergencyContAddress() {
+//		return this.emergencyContactAddress;
+//	}
 
 	public void setUhid(String uHID) {
 		uhid = uHID;
@@ -209,5 +217,9 @@ public class Patient implements java.io.Serializable {
 	public void setPatientAddress(Set<PatientAddress> patientAddress) {
 		this.patientAddress = patientAddress;
 	}
+	
+//	public void setEmergencyContactAddress(Set<EmergencyContAddress> emergencyContactAddress) {
+//		this.emergencyContactAddress = emergencyContactAddress;
+//	}
 
 }
