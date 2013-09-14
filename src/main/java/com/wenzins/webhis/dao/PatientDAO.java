@@ -5,7 +5,7 @@ import java.util.List;
 import com.wenzins.webhis.entity.Patient;
 
 public interface PatientDAO {
-	public void registerPatient(Patient patient);
+	public Long registerPatient(Patient patient);
 
 	public List<Patient> listAllPatients();
 

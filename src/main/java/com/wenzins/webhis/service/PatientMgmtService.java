@@ -10,7 +10,7 @@ public interface PatientMgmtService {
 
 	public Patient findPatientByUHID(String UHID);
 
-	public void registerPatient(Patient patient);
+	public Long registerPatient(Patient patient);
 	
 	public List<Patient> getAllPatients();
 

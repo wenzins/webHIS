@@ -16,8 +16,8 @@ public class PatientMgmtServiceImpl implements PatientMgmtService {
 
 	@Override
 	@Transactional
-	public void registerPatient(Patient patient) {
-		patientDAO.registerPatient(patient);
+	public Long registerPatient(Patient patient) {
+		return patientDAO.registerPatient(patient);
 	}
 
 	@Override

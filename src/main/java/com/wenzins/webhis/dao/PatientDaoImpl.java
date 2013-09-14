@@ -15,8 +15,9 @@ public class PatientDaoImpl implements PatientDAO {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public void registerPatient(Patient patient) {
-		this.sessionFactory.getCurrentSession().save(patient);
+	public Long registerPatient(Patient patient) {
+		//this.sessionFactory.getCurrentSession().save(patient);
+		return (Long)this.sessionFactory.getCurrentSession().save(patient);
 	}
 
 	@SuppressWarnings("unchecked")
