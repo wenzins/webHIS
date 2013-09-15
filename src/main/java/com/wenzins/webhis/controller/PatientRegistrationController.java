@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wenzins.webhis.entity.Patient;
-import com.wenzins.webhis.entity.types.PatientGender;
 import com.wenzins.webhis.service.PatientMgmtService;
 
 @Controller
@@ -24,14 +23,14 @@ public class PatientRegistrationController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
-	public String registerPatient(@RequestBody Patient patient) {
-		String salutation = "Mr/Sri";
-		if (patient.getGender().equals(PatientGender.Female)) {
-			salutation = "Mrs/Smt";
-		}
-		return "The MRD number of " + salutation + " " + patient.getFirstName()
-				+ " " + patient.getLastName() + " is: "
-				+ patientMgmtService.registerPatient(patient);
+	public void registerPatient(@RequestBody Patient patient) {
+		//String salutation = "Mr/Sri";
+//		if (patient.getGender().equals(PatientGender.Female)) {
+//			salutation = "Mrs/Smt";
+//		}
+//		return "The MRD number of " + salutation + " " + patient.getFirstName()
+//				+ " " + patient.getLastName() + " is: "
+		patientMgmtService.registerPatient(patient);
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)

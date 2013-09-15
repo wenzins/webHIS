@@ -18,7 +18,7 @@
 			'type' : 'POST',
 			'url' : url,
 			'contentType' : 'application/json',
-			'data' : JSON.stringify(data),
+			'data' : data,
 			'dataType' : dataType,
 			'success' : callback
 		});
@@ -41,8 +41,6 @@
 
 							var formData = form2js('registerForm');
 							var data = JSON.stringify(formData);
-							alert("Json data: " + data + "\n"
-									+ "Form data: " + formData);
 							var xhr = $.postJSON($(this).attr('action'), data,
 									function(respData, txtStatus, jqXHR) {
 										alert(txtStatus
@@ -232,18 +230,18 @@
 										class="optional" maxlength="60" />
 								</div>
 								<fieldset class="ui-grid-a">
-									<!--<div class="ui-block-a">
+									<div class="ui-block-a">
 										<div data-role="fieldcontain" align="left">
 											<label for="reg_comm_addr_country"
 												class="ui-hidden-accessible" class="select">Country:</label>
-											<select name="addr[comm][country]"
+											<select name="patientAddress[0].country"
 												id="reg_comm_addr_country" class="optional" value="">
 												<option value="">-- Select country --</option>
 												<option value="IN">India</option>
 
 											</select>
 										</div>
-									</div> -->
+									</div>
 									<div class="ui-block-b">
 										<div data-role="fieldcontain" align="left">
 											<label for="reg_comm_addr_state" class="ui-hidden-accessible"
@@ -266,6 +264,7 @@
 
 									</div>
 								</div>
+								<input name="patientAddress[0].addressType" id="reg_comm_addr_type"	type="hidden" value="Temporary"/>
 							</div>
 							<!--  Communication address -->
 
@@ -304,18 +303,18 @@
 										class="optional" maxlength="60" />
 								</div>
 								<div class="ui-grid-a">
-									<!-- <div class="ui-block-a">
+									<div class="ui-block-a">
 										<div data-role="fieldcontain" align="left">
 											<label for="reg_perm_addr_country"
 												class="ui-hidden-accessible" class="select">Country:</label>
-											<select name="addr[perm][country]"
+											<select name="patientAddress[1].country"
 												id="reg_perm_addr_country" class="optional" value="">
 												<option value="">-- Select country --</option>
 												<option value="IN">India</option>
 
 											</select>
 										</div> 
-									</div>-->
+									</div>
 									<div class="ui-block-b">
 										<div data-role="fieldcontain" align="left">
 
@@ -328,6 +327,7 @@
 											</select>
 										</div>
 									</div>
+									<input name="patientAddress[1].addressType" id="reg_comm_addr_type"	type="hidden" value="Permannent"/>
 								</div>
 								<div class="ui-grid-b">
 									<div class="ui-block-a" data-role="fieldcontain" align="left">
@@ -350,7 +350,7 @@
 									<div data-role="fieldcontain" align="left">
 										<label for="emer_con_fName" class="ui-hidden-accessible">First
 											name:</label> <input type="text" value=""
-											name="emCon[0][fName]" id="emer_con_fName"
+											name="emergencyContactAddress[0].firstName" id="emer_con_fName"
 											value="" placeholder="First name" maxlength="45" />
 									</div>
 								</div>
@@ -358,7 +358,7 @@
 									<div data-role="fieldcontain" align="left">
 										<label for="reg_mName" class="ui-hidden-accessible">Middle
 											name:</label> <input type="text" value=""
-											name="emCon[0][mName]"
+											name="emergencyContactAddress[0].middleName"
 											id="emer_con_mName" value="" placeholder="Middle name"
 											class="optional" maxlength="30" />
 									</div>
@@ -367,20 +367,30 @@
 									<div data-role="fieldcontain" align="left">
 										<label for="emer_con_lName" class="ui-hidden-accessible">Last
 											name:</label> <input type="text" value=""
-											name="emCon[0][lName]" id="reg_lName"
+											name="emergencyContactAddress[0].lastName" id="reg_lName"
 											value="" placeholder="Last name" maxlength="44" />
 									</div>
 								</div>
 								<div class="ui-block-a" data-role="fieldcontain" align="left">
 									<label for="emer_con_rel_type" class="ui-hidden-accessible">Relatoniship
-										type:</label> <input type="text" value=""
-										name="emCon[0][relType]" id="emer_con_rel_type"
-										value="" placeholder="Relatoniship type" maxlength="50" />
+										type:</label>
+										<select name="emergencyContactAddress[0].relationshipType"
+											id="emer_con_rel_type" class="optional" value="">
+											<option value="">-- Select Relationship --</option>
+											<option value="Spouse">Spouse</option>
+											<option value="Parent">Parent</option>
+											<option value="Child">Child</option>
+											<option value="Partner">Partner</option>
+											<option value="Cousin">Cousin</option>
+											<option value="Friend">Friend</option>
+											<option value="Neighbour">Neighbour</option>
+											<option value="Other">Other</option>
+										</select>
 								</div>
 								<div class="ui-block-a" align="left">
 									<div data-role="fieldcontain">
 										<label for="emer_con_email" class="ui-hidden-accessible">Email:</label>
-										<input type="email" name="emCon[0][email]"
+										<input type="email" name="emergencyContactAddress[0].email"
 											id="emer_con_email" value="" maxlength="255"
 											placeholder="Email" />
 									</div>
@@ -390,7 +400,7 @@
 								<div class="ui-block-a">
 									<div data-role="fieldcontain" align="left">
 										<label for="emer_con_mobile" class="ui-hidden-accessible">Mobile:</label>
-										<input type="tel" name="emCon[0][mobile]"
+										<input type="tel" name="emergencyContactAddress[0].mobile"
 											id="emer_con_mobile" value="" maxlength="16"
 											placeholder="Mobile" />
 									</div>
@@ -398,7 +408,7 @@
 								<div class="ui-block-b">
 									<div data-role="fieldcontain" align="left">
 										<label for="emer_con_phRes" class="ui-hidden-accessible">Phone(R):</label>
-										<input type="tel" value="" name="emCon[0][phRes]"
+										<input type="tel" value="" name="emergencyContactAddress[0].phoneRes"
 											id="emer_con_phRes" value="" maxlength="16"
 											placeholder="Phone(Res)" />
 									</div>
@@ -406,7 +416,7 @@
 								<div class="ui-block-c">
 									<div data-role="fieldcontain" align="left">
 										<label for="emer_con_phOff" class="ui-hidden-accessible">Phone(O):</label>
-										<input type="tel" value="" name="emCon[0][phOff]"
+										<input type="tel" value="" name="emergencyContactAddress[0].phoneOff"
 											id="emer_con_phOff" value="" maxlength="16"
 											placeholder="Phone(O)" />
 									</div>
@@ -416,27 +426,27 @@
 							<div data-role="fieldcontain" align="left">
 								<label for="emer_con_addr_line1" class="ui-hidden-accessible">Address
 									line 1:</label> <input type="text" value=""
-									name="emCon[0][addr][line1]"
+									name="emergencyContactAddress[0].addrLine1"
 									id="emer_con_addr_line1" value="" placeholder="Address line1"
 									maxlength="60" />
 							</div>
 							<div data-role="fieldcontain" align="left">
 								<label for="emer_con_addr_line2" class="ui-hidden-accessible">Address
 									Line 2:</label> <input type="text" value=""
-									name="emCon[0][addr][line2]"
+									name="emergencyContactAddress[0].addrLine2"
 									id="emer_con_addr_line2" value="" placeholder="Address line2"
 									class="optional" maxlength="60" />
 							</div>
 							<div data-role="fieldcontain" align="left">
 								<label for="emer_con_addr_city" class="ui-hidden-accessible">City:</label>
 								<input type="text" value=""
-									name="emCon[0][addr][city]" id="emer_con_addr_city"
+									name="emergencyContactAddress[0].city" id="emer_con_addr_city"
 									value="" placeholder="City" maxlength="60" />
 							</div>
 							<div data-role="fieldcontain" align="left">
 								<label for="emer_con_addr_district" class="ui-hidden-accessible">District:</label>
 								<input type="text" value=""
-									name="emCon[0][addr][district]"
+									name="emergencyContactAddress[0].district"
 									id="emer_con_addr_district" value="" placeholder="District"
 									class="optional" maxlength="60" />
 							</div>
@@ -445,11 +455,10 @@
 									<div data-role="fieldcontain" align="left">
 										<label for="emer_con_addr_country"
 											class="ui-hidden-accessible" class="select">Country:</label>
-										<select name="emCon[0][addr][country]"
+										<select name="emergencyContactAddress[0].country"
 											id="emer_con_addr_country" class="optional" value="">
 											<option value="">-- Select country --</option>
 											<option value="IN">India</option>
-
 										</select>
 									</div>
 								</div>
@@ -458,7 +467,7 @@
 
 										<label for="emer_con_addr_state" class="ui-hidden-accessible"
 											class="select">State:</label> <select
-											name="emCon[0][addr][state]"
+											name="emergencyContactAddress[0].state"
 											id="emer_con_addr_state" class="optional" value="">
 											<option value="">-- Select state --</option>
 											<option value="KA">Karnataka</option>
@@ -471,7 +480,7 @@
 								<div class="ui-block-a" data-role="fieldcontain" align="left">
 
 									<label for="emer_con_addr_pin" class="ui-hidden-accessible">Pin
-										code:</label> <input name="emCon[0][addr][pin]"
+										code:</label> <input name="emergencyContactAddress[0].pincode"
 										id="emer_con_addr_pin" class="optional" value=""
 										placeholder="Pin code" />
 
