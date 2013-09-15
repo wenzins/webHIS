@@ -188,4 +188,14 @@ public class PatientAddress implements java.io.Serializable {
 	public void setAddressId(Integer addressId) {
 		this.addressId = addressId;
 	}
+
+	@Override
+	public String toString() {
+		return "PatientAddress [addrLine1=" + addrLine1 + ", addrLine2="
+				+ addrLine2 + ", city=" + city + ", district=" + district
+				+ ", state=" + state + ", country=" + country + ", pincode="
+				+ pincode + ", phoneType=" + phoneType + ", phoneNumber="
+				+ phoneNumber + ", email=" + email + ", addressType="
+				+ addressType + "]";
+	}
 }

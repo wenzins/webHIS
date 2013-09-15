@@ -16,15 +16,15 @@ public class PatientDaoImpl implements PatientDAO {
 
 	@Override
 	public Long registerPatient(Patient patient) {
-		//this.sessionFactory.getCurrentSession().save(patient);
 		return (Long)this.sessionFactory.getCurrentSession().save(patient);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Patient> listAllPatients() {
-		return this.sessionFactory.getCurrentSession()
-				.createQuery("from Patient").list();
+		List<Patient> patientList = this.sessionFactory.getCurrentSession()
+		.createQuery("from Patient").list();
+		return patientList;
 	}
 
 	@Override

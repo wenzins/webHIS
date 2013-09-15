@@ -17,8 +17,8 @@ import com.wenzins.webhis.entity.types.RelationShip;
 public class EmergencyContAddress implements java.io.Serializable {
 
 	private static final long serialVersionUID = 4136173737730879320L;
-	
-	private String emergencyContId;
+
+	private Integer emergencyContId;
 
 	private String firstName;
 
@@ -56,12 +56,12 @@ public class EmergencyContAddress implements java.io.Serializable {
 	public EmergencyContAddress() {
 
 	}
-	
-	public EmergencyContAddress(String firstName,
-			String middleName, String lastName, RelationShip relationshipType,
-			String addrLine1, String addrLine2, String city,
-			String district, String state, String country, String pincode,
-			String mobile, String phoneOff, String phoneRes, String email) {
+
+	public EmergencyContAddress(String firstName, String middleName,
+			String lastName, RelationShip relationshipType, String addrLine1,
+			String addrLine2, String city, String district, String state,
+			String country, String pincode, String mobile, String phoneOff,
+			String phoneRes, String email) {
 		super();
 		this.firstName = firstName;
 		this.middleName = middleName;
@@ -83,7 +83,7 @@ public class EmergencyContAddress implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ERMERGENCY_CONT_ID", unique = true, nullable = false)
-	public String getEmergencyConId() {
+	public Integer getEmergencyConId() {
 		return emergencyContId;
 	}
 
@@ -219,6 +219,10 @@ public class EmergencyContAddress implements java.io.Serializable {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public void setPhoneOff(String phoneOff) {
 		this.phoneOff = phoneOff;
@@ -227,9 +231,21 @@ public class EmergencyContAddress implements java.io.Serializable {
 	public void setPhoneRes(String phoneRes) {
 		this.phoneRes = phoneRes;
 	}
-	
-	public void setEmergencyContId(String emergencyContId) {
+
+	public void setEmergencyConId(Integer emergencyContId) {
 		this.emergencyContId = emergencyContId;
+	}
+
+	@Override
+	public String toString() {
+		return "EmergencyContAddress [firstName=" + firstName + ", middleName="
+				+ middleName + ", lastName=" + lastName + ", relationshipType="
+				+ relationshipType + ", addrLine1=" + addrLine1
+				+ ", addrLine2=" + addrLine2 + ", city=" + city + ", district="
+				+ district + ", state=" + state + ", country=" + country
+				+ ", pincode=" + pincode + ", mobile=" + mobile + ", phoneOff="
+				+ phoneOff + ", phoneRes=" + phoneRes + ", email=" + email
+				+ "]";
 	}
 
 }

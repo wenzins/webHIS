@@ -82,9 +82,9 @@ public class Patient implements java.io.Serializable {
 	@JoinColumn(name = "PATIENT_ID")
 	private Set<PatientAddress> patientAddress;
 	
-//	@OneToMany( fetch = FetchType.EAGER , cascade=CascadeType.ALL)
-//	@JoinColumn(name = "PATIENT_ID")
-//	private Set<EmergencyContAddress> emergencyContactAddress;
+	@OneToMany(fetch = FetchType.EAGER , cascade=CascadeType.ALL)
+	@JoinColumn(name = "PATIENT_ID")
+	private Set<EmergencyContAddress> emergencyContactAddress;
 
 	public String getUhid() {
 		return uhid;
@@ -150,9 +150,9 @@ public class Patient implements java.io.Serializable {
 		return patientAddress;
 	}
 	
-//	public Set<EmergencyContAddress> getEmergencyContAddress() {
-//		return this.emergencyContactAddress;
-//	}
+	public Set<EmergencyContAddress> getEmergencyContactAddress() {
+		return this.emergencyContactAddress;
+	}
 
 	public void setUhid(String uHID) {
 		uhid = uHID;
@@ -218,8 +218,21 @@ public class Patient implements java.io.Serializable {
 		this.patientAddress = patientAddress;
 	}
 	
-//	public void setEmergencyContactAddress(Set<EmergencyContAddress> emergencyContactAddress) {
-//		this.emergencyContactAddress = emergencyContactAddress;
-//	}
+	public void setEmergencyContactAddress(Set<EmergencyContAddress> emergencyContactAddress) {
+		this.emergencyContactAddress = emergencyContactAddress;
+	}
+	
+	@Override
+	public String toString() {
+		return "Patient [uhid=" + uhid + ", firstName=" + firstName
+				+ ", middleName=" + middleName + ", lastName=" + lastName
+				+ ", email=" + email + ", mobile=" + mobile + ", phRes="
+				+ phRes + ", phOff=" + phOff + ", dateOfBirth=" + dateOfBirth
+				+ ", age=" + age + ", gender=" + gender + ", occupation="
+				+ occupation + ", emergencyContName=" + emergencyContName
+				+ ", emergencyRelationShip=" + emergencyRelationShip
+				+ ", patientAddress=" + patientAddress
+				+ ", emergencyContactAddress=" + emergencyContactAddress + "]";
+	}
 
 }

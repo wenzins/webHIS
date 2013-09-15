@@ -7,6 +7,7 @@ import java.util.Set;
 import org.hibernate.Session;
 
 import com.google.gson.Gson;
+import com.wenzins.webhis.entity.EmergencyContAddress;
 import com.wenzins.webhis.entity.Patient;
 import com.wenzins.webhis.entity.PatientAddress;
 import com.wenzins.webhis.entity.types.AddressType;
@@ -32,6 +33,23 @@ public class TestPatientAssociation
 		address1.setPincode("45555");
 		address1.setState("Karnataka");
 		address1.setCountry("India");
+		
+		EmergencyContAddress emrgencyContAddress = new EmergencyContAddress();
+		emrgencyContAddress.setAddrLine1("sfsdfsdf");
+		emrgencyContAddress.setAddrLine2("asdsadasd");
+		emrgencyContAddress.setCity("Banalore");
+		emrgencyContAddress.setCountry("India");
+		emrgencyContAddress.setDistrict("Bangalore");
+		emrgencyContAddress.setFirstName("Ramesh");
+		emrgencyContAddress.setLastName("sadasd");
+		emrgencyContAddress.setMiddleName("asdasdasd");
+		emrgencyContAddress.setMobile("345345435435");
+		emrgencyContAddress.setPhoneOff("234234234");
+		emrgencyContAddress.setPhoneRes("123123213");
+		emrgencyContAddress.setPincode("324234234");
+		emrgencyContAddress.setRelationshipType(RelationShip.Friend);
+		emrgencyContAddress.setState("Namma Karnataka");
+		
 	
 		
 		
@@ -56,10 +74,12 @@ public class TestPatientAssociation
 		
 		
 		Set<PatientAddress> patientAddressSet = new HashSet<PatientAddress>();
+		Set<EmergencyContAddress> emergencyContAddressSet = new HashSet<EmergencyContAddress>();
 		patientAddressSet.add(address1);
+		emergencyContAddressSet.add(emrgencyContAddress);
 		
 		
-		
+		patient.setEmergencyContactAddress(emergencyContAddressSet);
 		patient.setPatientAddress(patientAddressSet);
 		//Save Employee
 		Gson gson = new Gson();
